@@ -36,8 +36,14 @@ void PrintVector(const vector<int>& vec) {
     cout << endl;
 }
 
+void UnsortedData(vector<int>& vec) {
+    vec = { 64, 34, 25, 12, 22, 11, 90 };
+}
+
 int main() {
-    vector<int> data = { 64, 34, 25, 12, 22, 11, 90 };
+    vector<int> data;
+
+    UnsortedData(data);
 
     cout << "Unsorted Vector:" << endl;
     PrintVector(data);
@@ -47,15 +53,15 @@ int main() {
     cout << "Sorted Vector using Bubble Sort:" << endl;
     PrintVector(data);
 
-    vector<int> data2 = {64, 34, 25, 12, 22, 11, 90};
+    UnsortedData(data);
 
     cout << "Unsorted Vector:" << endl;
-    PrintVector(data2);
+    PrintVector(data);
 
-    InsertionSort(data2);
+    InsertionSort(data);
 
     cout << "Sorted Vector using Bubble Sort:" << endl;
-    PrintVector(data2);
+    PrintVector(data);
 
     return 0;
 }
