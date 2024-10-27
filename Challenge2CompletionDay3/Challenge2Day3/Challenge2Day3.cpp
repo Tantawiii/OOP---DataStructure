@@ -33,9 +33,16 @@ void deleteEmployee(Employee*& head, int id) {
         byebyeEmp = byebyeEmp->next;
     }
     if (byebyeEmp) {
-        if (byebyeEmp->prev) byebyeEmp->prev->next = byebyeEmp->next;
-        if (byebyeEmp->next) byebyeEmp->next->prev = byebyeEmp->prev;
-        if (byebyeEmp == head) head = byebyeEmp->next;
+        if (byebyeEmp->prev) {
+            byebyeEmp->prev->next = byebyeEmp->next;
+        }
+        if (byebyeEmp->next)
+        {
+            byebyeEmp->next->prev = byebyeEmp->prev;
+        }
+        if (byebyeEmp == head) {
+            head = byebyeEmp->next;
+        }
         delete byebyeEmp;
     }
     else {
@@ -46,7 +53,9 @@ void deleteEmployee(Employee*& head, int id) {
 Employee* findEmployee(Employee* head, int id) {
     Employee* temp = head;
     while (temp) {
-        if (temp->id == id) return temp;
+        if (temp->id == id) {
+            return temp;
+        }
         temp = temp->next;
     }
     return nullptr;
@@ -61,15 +70,64 @@ void replaceEmployee(Employee*& head, int id, string newName, int newId) {
         Employee* newEmp = new Employee(newId, newName);
         newEmp->prev = prev;
         newEmp->next = next;
-        if (prev) prev->next = newEmp;
-        if (next) next->prev = newEmp;
-        if (emp == head) head = newEmp;
+        if (prev) {
+            prev->next = newEmp;
+        }
+        if (next) {
+            next->prev = newEmp;
+        }
+        if (emp == head) {
+            head = newEmp;
+        }
     }
     else {
         cout << "Employee with ID " << id << " not found!" << endl;
     }
 }
 
+Employee* mergeSort(Employee* head) {
+    if (!head || !head->next) {
+        return head;
+    }
+    Employee* slow = head;
+    Employee* fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    Employee* right = slow->next;
+    slow->next = nullptr;
+    if (right) {
+        right->prev = nullptr;
+    }
+
+    Employee* leftList = mergeSort(head);
+    Employee* rightList = mergeSort(right);
+    Employee* result = nullptr, * tail = nullptr;
+    while (leftList || rightList) {
+        Employee* next = nullptr;
+        if (!rightList || (leftList && leftList->id <= rightList->id)) {
+            next = leftList;
+            leftList = leftList->next;
+        }
+        else {
+            next = rightList;
+            rightList = rightList->next;
+        }
+
+        next->prev = tail;
+        if (tail) tail->next = next;
+        else result = next;
+        tail = next;
+    }
+
+    return result;
+}
+
+void sortEmployees(Employee*& head) {
+    head = mergeSort(head);
+}
 
 void printAll(Employee* head) {
     Employee* temp = head;
@@ -85,11 +143,10 @@ int main() {
     addEmployee(head, 3, "Umar");
     addEmployee(head, 1, "Omar");
     addEmployee(head, 2, "Omer");
-
     cout << "All Employees:" << endl;
     printAll(head);
-    replaceEmployee(head, 2, "Omr", 8);
 
+    replaceEmployee(head, 2, "Omr", 0);
     cout << "\nAfter Replacing Omer with Omr:" << endl;
     printAll(head);
 
@@ -101,7 +158,10 @@ int main() {
     else {
         cout << "Employee with ID 1 not found!" << endl;
     }
+    printAll(head);
 
+    sortEmployees(head);
+    cout << "\nAll Employees (Sorted):" << endl;
     printAll(head);
 
     return 0;
