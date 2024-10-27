@@ -84,8 +84,8 @@ void replaceEmployee(Employee*& head, int id, string newName, int newId) {
         cout << "Employee with ID " << id << " not found!" << endl;
     }
 }
-
-Employee* mergeSort(Employee* head) {
+//https://www.youtube.com/watch?v=JTD_yXm9Wn0&t=363s revise from it later on
+/*Employee* mergeSort(Employee* head) {
     if (!head || !head->next) {
         return head;
     }
@@ -127,7 +127,48 @@ Employee* mergeSort(Employee* head) {
 
 void sortEmployees(Employee*& head) {
     head = mergeSort(head);
+}*/
+Employee* split(Employee* head) {
+    Employee* slow = head;
+    Employee* fast = head;
+    while (fast->next && fast->next->next) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    Employee* temp = slow->next;
+    slow->next = nullptr;
+    if (temp) temp->prev = nullptr;
+    return temp;
 }
+
+Employee* merge(Employee* leftList, Employee* rightList) {
+    if (leftList == nullptr) return rightList;
+    if (rightList == nullptr) return leftList;
+
+    if (leftList->id <= rightList->id) {
+        leftList->next = merge(leftList->next, rightList);
+        if (leftList->next) leftList->next->prev = leftList;
+        leftList->prev = nullptr;
+        return leftList;
+    }
+    else {
+        rightList->next = merge(leftList, rightList->next);
+        if (rightList->next) rightList->next->prev = rightList;
+        rightList->prev = nullptr;
+        return rightList;
+    }
+}
+
+Employee* mergeSort(Employee* head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+    Employee* mid = split(head);
+    Employee* leftList = mergeSort(head);
+    Employee* rightList = mergeSort(mid);
+    return merge(leftList, rightList);
+}
+
 
 void printAll(Employee* head) {
     Employee* temp = head;
@@ -160,7 +201,8 @@ int main() {
     }
     printAll(head);
 
-    sortEmployees(head);
+    //sortEmployees(head);
+    head = mergeSort(head);
     cout << "\nAll Employees (Sorted):" << endl;
     printAll(head);
 
