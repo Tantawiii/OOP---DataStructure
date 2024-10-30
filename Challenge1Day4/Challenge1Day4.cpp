@@ -59,6 +59,17 @@ struct queue {
         }
     }
 
+    student* find(int id) {
+        student* temp = infront;
+        while (temp != NULL) {
+            if (temp->id == id) {
+                return temp;
+            }
+            temp = temp->next;
+        }
+        return NULL;
+    }
+
     void display() {
         if (infront == NULL) {
             cout << "The queue is empty!\n\n";
@@ -72,22 +83,77 @@ struct queue {
     }
 };
 
+void menu() {
+    cout << "Menu:\n";
+    cout << "1. Enqueue a student\n";
+    cout << "2. Enqueue at a specific index\n";
+    cout << "3. Find a student by ID\n";
+    cout << "4. Display all students\n";
+    cout << "5. Exit\n";
+    cout << "Enter your choice: ";
+}
+
 int main() {
     queue q;
-    q.display();
+    int choice, id, index;
+    string name;
 
-    student* n1 = new student{ 1, "Tantawy" };
-    student* n2 = new student{ 2, "Masoud" };
-    student* n3 = new student{ 3, "Omar" };
+    do {
+        menu();
+        cin >> choice;
+        student* n1 = new student{ 1, "Tantawy" };
+        student* n2 = new student{ 2, "Masoud" };
+        student* n3 = new student{ 3, "Omar" };
 
-    q.enqueue(n1);
-    q.enqueue(n2);
-    q.display();
+        switch (choice) {
+        case 1:
+            /*cout << "Enter student ID: ";
+            cin >> id;
+            cout << "Enter student name: ";
+            cin >> name;
+            q.enqueue(new student{ id, name });
+            cout << "Student " << name << " added to the queue.\n\n";*/
+            q.enqueue(n1);
+            q.enqueue(n2);
+            break;
 
-    q.enqueueIndex(n3, 0);
-    q.display();
+        case 2:
+            /*cout << "Enter student ID: ";
+            cin >> id;
+            cout << "Enter student name: ";
+            cin >> name;
+            cout << "Enter index: ";
+            cin >> index;
+            q.enqueueIndex(new student{ id, name }, index);*/
+            q.enqueueIndex(n3, 0);
+            break;
 
-    q.enqueueIndex(n3, -1);
+        case 3:
+            cout << "Enter student ID to search: ";
+            cin >> id;
+            student* found;
+            found = q.find(id);
+            if (found != NULL) {
+                cout << "Student found: ID: " << found->id << ", Name: " << found->name << "\n\n";
+            }
+            else {
+                cout << "Student with ID " << id << " not found.\n\n";
+            }
+            break;
+
+        case 4:
+            q.display();
+            break;
+
+        case 5:
+            cout << "Exiting the program.\n";
+            break;
+
+        default:
+            cout << "Invalid choice! Please try again.\n\n";
+            break;
+        }
+    } while (choice != 5);
 
     return 0;
 }
