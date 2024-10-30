@@ -59,6 +59,17 @@ struct queue {
         }
     }
 
+    void dequeue() {
+        if (infront == NULL) {
+            cout << "Empty Queue\n\n";
+            return;
+        }
+        student* temp = infront;
+        infront = infront->next;
+        delete temp;
+    }
+
+
     student* find(int id) {
         student* temp = infront;
         while (temp != NULL) {
@@ -89,7 +100,8 @@ void menu() {
     cout << "2. Enqueue at a specific index\n";
     cout << "3. Find a student by ID\n";
     cout << "4. Display all students\n";
-    cout << "5. Exit\n";
+    cout << "5. Dequeue a student\n";
+    cout << "6. Exit\n";
     cout << "Enter your choice: ";
 }
 
@@ -146,6 +158,10 @@ int main() {
             break;
 
         case 5:
+            q.dequeue();
+            break;
+
+        case 6:
             cout << "Exiting the program.\n";
             break;
 
@@ -153,7 +169,7 @@ int main() {
             cout << "Invalid choice! Please try again.\n\n";
             break;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
