@@ -88,7 +88,7 @@ Student* remove(Student* student, int id) {
 
 void display() {
     int nodeCount;
-    if(flag == false)
+    if (flag == false)
         nodeCount = insertionOrder.size();
     else
         nodeCount = insertionOrder.size() - 1;
@@ -105,29 +105,74 @@ void display() {
 }
 
 
+void menu() {
+    cout << "\nMenu:\n";
+    cout << "1. Insert a student\n";
+    cout << "2. Delete a student\n";
+    cout << "3. Search for a student\n";
+    cout << "4. Display all students\n";
+    cout << "5. Exit\n";
+    cout << "Enter your choice: ";
+}
+
+
 int main() {
     Student* student = NULL;
-    student = insert(student, 3, "Masoud");
-    student = insert(student, 1, "Omar");
-    student = insert(student, 2, "Tantawy");
-    student = insert(student, 4, "Umar");
-    display();
+    int choice, id;
+    string name;
 
-    int tempID = 2;
-    Student* found = find(student, tempID);
-    if (found != NULL) {
-        cout << "\nStudent found: ID: " << found->id << ", Name: " << found->name
-            << ", Direction: " << found->direction << "\n";
-    }
-    else {
-        cout << "\nStudent with ID " << tempID << " not found.\n";
-    }
+    do {
+        menu();
+        cin >> choice;
 
-    tempID = 4;
-    flag = true;
-    student = remove(student, tempID);
-    cout << "\nTree after removing student with ID " << tempID << ":\n";
-    display();
+        switch (choice) {
+        case 1:
+            /*cout << "Enter student ID: ";
+            cin >> id;
+            cout << "Enter student name: ";
+            cin >> name;
+            student = insert(student, id, name);
+            */
+            student = insert(student, 3, "Masoud");
+            student = insert(student, 1, "Omar");
+            student = insert(student, 2, "Tantawy");
+            student = insert(student, 4, "Umar");
+            break;
+
+        case 2:
+            cout << "Enter student ID to delete: ";
+            cin >> id;
+            flag = true;
+            student = remove(student, id);
+            break;
+
+        case 3:
+            cout << "Enter student ID to search: ";
+            cin >> id;
+            Student* found;
+            found = find(student, id);
+            if (found != NULL) {
+                cout << "Student found: ID: " << found->id << ", Name: " << found->name
+                    << ", Direction: " << found->direction << "\n";
+            }
+            else {
+                cout << "Student with ID " << id << " not found.\n";
+            }
+            break;
+
+        case 4:
+            display();
+            break;
+
+        case 5:
+            cout << "Exiting the program.\n";
+            break;
+
+        default:
+            cout << "Invalid choice! Please try again.\n";
+            break;
+        }
+    } while (choice != 5);
 
     return 0;
 }
