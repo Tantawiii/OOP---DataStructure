@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{75108760-4fd2-4642-b0db-2ada8ac4dca3}</ProjectGuid>
-    <RootNamespace>Challenge1Day4</RootNamespace>
+    <ProjectGuid>{d156a475-c864-4ce7-b5b5-0844de6a288e}</ProjectGuid>
+    <RootNamespace>Challenge2Day4</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Challenge1Day4.cpp" />
+    <ClCompile Include="Challenge2Day4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
