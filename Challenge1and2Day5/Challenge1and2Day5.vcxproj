@@ -127,11 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BonusTreasureGame.cpp" />
     <ClCompile Include="Challenge1Day5.cpp" />
     <ClCompile Include="Challenge2Day5.cpp" />
     <ClCompile Include="ComplexNumber.cpp" />
+    <ClCompile Include="TreasureGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BonusTreasureGame.h" />
     <ClInclude Include="ComplexNumber.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

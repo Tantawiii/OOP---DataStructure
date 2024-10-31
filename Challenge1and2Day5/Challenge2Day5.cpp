@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ComplexNumber.h"
+#include "BonusTreasureGame.h"
 using namespace std;
 
 void menu() {
@@ -10,7 +11,8 @@ void menu() {
     cout << "4. Get Real and Imaginary Parts" << endl;
     cout << "5. Show Object Count" << endl;
     cout << "6. Deconstructor Test" << endl;
-    cout << "7. Exit" << endl;
+    cout << "7. Treasure Game" << endl;
+    cout << "8. Exit" << endl;
     cout << "Enter your choice: ";
 }
 
@@ -62,6 +64,12 @@ int main() {
             cout << "Current object count: " << ComplexNumber::getObjectCount() << endl;
             break;
         case 7:
+            {
+                BonusTreasureGame game;
+                game.startGame();
+            }
+            break;
+        case 8:
             cout << "Exiting." << endl;
             break;
         default:
@@ -69,7 +77,7 @@ int main() {
             break;
         }
         cout << endl;
-    } while (choice != 7);
+    } while (choice != 8);
 
     return 0;
 }
