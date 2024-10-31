@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Challenge1Day5.cpp" />
+    <ClCompile Include="Challenge2Day5.cpp" />
     <ClCompile Include="ComplexNumber.cpp" />
   </ItemGroup>
   <ItemGroup>
