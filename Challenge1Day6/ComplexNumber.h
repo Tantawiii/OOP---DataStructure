@@ -32,9 +32,9 @@ public:
     ComplexNumber operator/(const ComplexNumber& op);
     ComplexNumber operator*(const ComplexNumber& op);
     void operator++();
-    void operator++(int);
+    float operator++(int);
     void operator--();
-    void operator--(int);
+    float operator--(int);
     bool operator==(const ComplexNumber& op);
     bool operator!=(const ComplexNumber& op);
     operator int() const;

@@ -31,6 +31,7 @@ int main() {
     Dept department("Game");
     Uni university("ITI");
     TA assistant("Eng. Osama");
+    float temp;
     int choice;
 
     do {
@@ -109,15 +110,25 @@ int main() {
             assistant.displayCourses();
             assistant.assist();
 
+            cout << "Default Val" << endl;
             newVal.display();
+
+            cout << "Prefix Val" << endl;
             ++newVal;
             newVal.display();
+
+            cout << "Postfix Val" << endl;
             newVal++;
             newVal.display();
+
+            cout << "Prefix Val" << endl;
             --newVal;
             newVal.display();
+
+            cout << "Postfix Val" << endl;
             newVal--;
             newVal.display();
+
             break;
         case 9:
             cout << "Exiting." << endl;

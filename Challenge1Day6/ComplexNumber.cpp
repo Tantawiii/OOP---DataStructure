@@ -93,10 +93,12 @@ void ComplexNumber::operator++() {
     cout << wow << endl;
 }
 
-void ComplexNumber::operator++(int) {
+float ComplexNumber::operator++(int) {
     cout << "This is supossed to be postfix add" << endl;
+    float temp = wow;
     cout << wow << endl;
     wow++;
+    return temp;
 }
 
 void ComplexNumber::operator--() {
@@ -105,8 +107,10 @@ void ComplexNumber::operator--() {
     cout << wow << endl;
 }
 
-void ComplexNumber::operator--(int) {
+float ComplexNumber::operator--(int) {
     cout << "This is supossed to be postfix subtract" << endl;
+    float temp = wow;
     cout << wow << endl;
     wow--;
+    return temp;
 }
