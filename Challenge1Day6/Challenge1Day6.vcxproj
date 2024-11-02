@@ -128,10 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ComplexNumber.h" />
+    <ClInclude Include="Course.h" />
+    <ClInclude Include="Dept.h" />
+    <ClInclude Include="Prof.h" />
+    <ClInclude Include="TA.h" />
+    <ClInclude Include="Uni.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComplexNumber.cpp" />
+    <ClCompile Include="Course.cpp" />
+    <ClCompile Include="Dept.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Prof.cpp" />
+    <ClCompile Include="TA.cpp" />
+    <ClCompile Include="Uni.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

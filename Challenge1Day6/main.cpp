@@ -1,5 +1,10 @@
 #include <iostream>
 #include "ComplexNumber.h"
+#include "Uni.h"
+#include "TA.h"
+#include "Dept.h"
+#include "Prof.h"
+#include "Course.h"
 using namespace std;
 
 void menu() {
@@ -11,7 +16,8 @@ void menu() {
     cout << "5. Show Object Count" << endl;
     cout << "6. Deconstructor Test" << endl;
     cout << "7. Overload Operators and casting operator!" << endl;
-    cout << "8. Exit" << endl;
+    cout << "8. Implementation of the four types of relations & bonus" << endl;
+    cout << "9. Exit" << endl;
     cout << "Enter your choice: ";
 }
 
@@ -19,6 +25,12 @@ int main() {
     ComplexNumber value1(3.0, 4.3);
     ComplexNumber value2(1.0, 2.0);
     ComplexNumber result, result2;
+    ComplexNumber newVal(3, 4);
+    Course course1("OOP"), course2("Algorithms");
+    Prof professor("Tanta");
+    Dept department("Game");
+    Uni university("ITI");
+    TA assistant("Eng. Osama");
     int choice;
 
     do {
@@ -82,6 +94,32 @@ int main() {
             cout << (value1 != value2 ? "Not Equal" : "Equal") << endl;
             break;
         case 8:
+            professor.addCourse(&course1);
+            professor.addCourse(&course2);
+            professor.displayCourses();
+
+            department.addProfessor(&professor);
+            department.displayProfessors();
+
+            university.addDepartment(new Dept("Engineering"));
+            university.addDepartment(new Dept("Arts"));
+            university.displayDepartments();
+
+            assistant.addCourse(&course1);
+            assistant.displayCourses();
+            assistant.assist();
+
+            newVal.display();
+            ++newVal;
+            newVal.display();
+            newVal++;
+            newVal.display();
+            --newVal;
+            newVal.display();
+            newVal--;
+            newVal.display();
+            break;
+        case 9:
             cout << "Exiting." << endl;
             break;
         default:

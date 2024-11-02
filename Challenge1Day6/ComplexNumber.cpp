@@ -86,3 +86,27 @@ ComplexNumber::operator int() const {
     cout << "Test" << endl;
     return wow;
 }
+
+void ComplexNumber::operator++() {
+    cout << "This is supossed to be prefix add" << endl;
+    ++wow;
+    cout << wow << endl;
+}
+
+void ComplexNumber::operator++(int) {
+    cout << "This is supossed to be postfix add" << endl;
+    cout << wow << endl;
+    wow++;
+}
+
+void ComplexNumber::operator--() {
+    cout << "This is supossed to be prefix subtract" << endl;
+    --wow;
+    cout << wow << endl;
+}
+
+void ComplexNumber::operator--(int) {
+    cout << "This is supossed to be postfix subtract" << endl;
+    cout << wow << endl;
+    wow--;
+}
