@@ -3,7 +3,7 @@
 
 int ComplexNumber::objectCount = 0;
 
-ComplexNumber::ComplexNumber(double r, double i) : real(r), imaginary(i) {
+ComplexNumber::ComplexNumber(float r, float i) : real(r), imaginary(i) {
     objectCount++;
 }
 
@@ -15,19 +15,19 @@ ComplexNumber::~ComplexNumber() {
     objectCount--;
 }
 
-void ComplexNumber::setReal(double r) {
+void ComplexNumber::setReal(float r) {
     real = r;
 }
 
-double ComplexNumber::getReal() const {
+float ComplexNumber::getReal() const {
     return real;
 }
 
-void ComplexNumber::setImaginary(double i) {
+void ComplexNumber::setImaginary(float i) {
     imaginary = i;
 }
 
-double ComplexNumber::getImaginary() const {
+float ComplexNumber::getImaginary() const {
     return imaginary;
 }
 
@@ -41,6 +41,10 @@ ComplexNumber ComplexNumber::Subtract(ComplexNumber& value) {
 
 void ComplexNumber::Display() {
     cout << real << " + " << imaginary << "i" << endl;
+}
+
+void ComplexNumber::display() {
+    cout << wow << endl;
 }
 
 int ComplexNumber::getObjectCount() {
@@ -64,7 +68,7 @@ ComplexNumber ComplexNumber::operator*(const ComplexNumber& op) {
 
 ComplexNumber ComplexNumber::operator/(const ComplexNumber& op) {
     cout << "This is /" << endl;
-    double denominator = op.real * op.real + op.imaginary * op.imaginary;
+    float denominator = op.real * op.real + op.imaginary * op.imaginary;
     return ComplexNumber((real * op.real + imaginary * op.imaginary) / denominator,(imaginary * op.real - real * op.imaginary) / denominator);
 }
 
@@ -76,4 +80,9 @@ bool ComplexNumber::operator==(const ComplexNumber& op) {
 bool ComplexNumber::operator!=(const ComplexNumber& op) {
     cout << "This is !=" << endl;
     return (real != op.real || imaginary != op.imaginary);
+}
+
+ComplexNumber::operator int() const {
+    cout << "Test" << endl;
+    return wow;
 }

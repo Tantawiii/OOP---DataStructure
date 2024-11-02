@@ -16,7 +16,7 @@ void menu() {
 }
 
 int main() {
-    ComplexNumber value1(3.0, 4.0);
+    ComplexNumber value1(3.0, 4.3);
     ComplexNumber value2(1.0, 2.0);
     ComplexNumber result, result2;
     int choice;
@@ -74,8 +74,11 @@ int main() {
 
             result2 = value1 / value2;
             result2.Display();
+            cout << "After Casting:" << endl;
+            value1 = (int) value1;
+            value1.display();
 
-            cout << (value1 == value2 ? "Equal" : "Not Equal") << endl;
+            cout << (value1 == value2 ? (int)true : (int) false) << endl;
             cout << (value1 != value2 ? "Not Equal" : "Equal") << endl;
             break;
         case 8:

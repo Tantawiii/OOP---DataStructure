@@ -4,24 +4,26 @@ using namespace std;
 
 class ComplexNumber {
 private:
-    double real;
-    double imaginary;
+    float real;
+    float imaginary;
+    float wow = real + imaginary;
     static int objectCount;
 
 public:
-    ComplexNumber(double r = 0.0, double i = 0.0);
+    ComplexNumber(float r = 0.0, float i = 0.0);
     ComplexNumber(const ComplexNumber& other);
 
     ~ComplexNumber();
 
-    void setReal(double real);
-    double getReal() const;
-    void setImaginary(double imaginary);
-    double getImaginary() const;
+    void setReal(float real);
+    float getReal() const;
+    void setImaginary(float imaginary);
+    float getImaginary() const;
 
     ComplexNumber Add(ComplexNumber& value);
     ComplexNumber Subtract(ComplexNumber& value);
     void Display();
+    void display();
 
     static int getObjectCount();
 
@@ -31,4 +33,5 @@ public:
     ComplexNumber operator*(const ComplexNumber& op);
     bool operator==(const ComplexNumber& op);
     bool operator!=(const ComplexNumber& op);
+    operator int() const;
 };
