@@ -1,7 +1,8 @@
 #include "Circle.h"
-void Circle::calculateArea() {
-	float radius;
-	cout << "Radius: " << endl;
-	cin >> radius;
-	cout << 3.16 * (radius * radius)<< endl;
+
+Circle::Circle(double r) : radius(r) {}
+
+double Circle::calculateArea() const {
+    cout << 3.14159 * radius * radius << endl;
+    return 3.14159 * radius * radius;
 }

@@ -1,7 +1,8 @@
 #include "Square.h"
-void Square::calculateArea() {
-	float side;
-	cout << "Side: " << endl;
-	cin >> side;
-	cout << side * side << endl;
+
+Square::Square(double s) : side(s) {}
+
+double Square::calculateArea() const {
+    cout << side * side << endl;
+    return side * side;
 }

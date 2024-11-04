@@ -2,9 +2,11 @@
 #include <iostream>
 #include "GeometricShape.h"
 using namespace std;
-class Square : public GeometricShape
-{
-	public:
-		void calculateArea() override;
-};
+class Square : public GeometricShape {
+private:
+    double side;
 
+public:
+    Square(double s);
+    double calculateArea() const override;
+};

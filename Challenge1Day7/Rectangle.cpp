@@ -1,9 +1,8 @@
 #include "Rectangle.h"
-void Rectangle::calculateArea() {
-	float length, width;
-	cout << "Length: " << endl;
-	cin >> length;
-	cout << "Width: " << endl;
-	cin >> width;
-	cout << length * width << endl;
+
+Rectangle::Rectangle(double w, double h) : width(w), height(h) {}
+
+double Rectangle::calculateArea() const {
+    cout << width * height << endl;
+    return width * height;
 }
