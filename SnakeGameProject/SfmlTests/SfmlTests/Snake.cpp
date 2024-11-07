@@ -100,18 +100,53 @@ bool Snake::checkSnakeCollision(const std::vector<sf::RectangleShape>& snakeBody
     }
 
     // Obstacle Collision Check (as already present)
-    if (head.getGlobalBounds().intersects(mainObstacle.getGlobalBounds()) ||
-        head.getGlobalBounds().intersects(obstacleX.getGlobalBounds()) ||
-        head.getGlobalBounds().intersects(obstacleY.getGlobalBounds())) {
+    if (head.getGlobalBounds().intersects(obstacleX.getGlobalBounds())) { // White obstacle
         if (invincible) {
             score += 10;  // Add score if invincible
+            invincible == false;
+            return false;
+        }
+        else {
+            if (score < 100) {
+                health--;
+                return (health <= 0);  // Return true if health reaches zero
+            }
+            else {
+                invincible == true;
+                score -= 100;  // Deduct 100 points if score is 100 or more
+            }
+        }
+    }
+    else if (head.getGlobalBounds().intersects(obstacleY.getGlobalBounds())) { // Black obstacle
+        if (invincible) {
+            score += 10;  // Add score if invincible
+            invincible == false;
+            return false;
+        }
+        else {
+            if (score < 200) {
+                health--;
+                return (health <= 0);  // Return true if health reaches zero
+            }
+            else {
+                invincible == true;
+                score -= 200;  // Deduct 200 points if score is 200 or more
+            }
+        }
+    }
+    else if (head.getGlobalBounds().intersects(mainObstacle.getGlobalBounds())) { // Main obstacle
+        if (invincible) {
+            score += 10;  // Add score if invincible
+            invincible == false;
             return false;
         }
         else {
             health--;
-            return true;  // Collision detected
+            invincible == true;
+            return (health <= 0);  // Return true if health reaches zero
         }
     }
+
 
     // Self-collision check
     for (size_t i = 1; i < snakeBody.size(); i++) {

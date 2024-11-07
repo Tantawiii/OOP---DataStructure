@@ -18,7 +18,7 @@ bool Collectible::checkCollision(const sf::RectangleShape& snakeHead) const {
 void Collectible::generateCollectible(const sf::RenderWindow& window, const std::vector<Position>& emptyPositions) {
     if (emptyPositions.empty()) return;
     Position pos = emptyPositions[rand() % emptyPositions.size()];
-    collectible.setPosition(pos.col * collectible.getSize().x, pos.row * collectible.getSize().y);
+    collectible.setPosition(pos.col * emptyPositions.size(), pos.row * emptyPositions.size());
 }
 
 

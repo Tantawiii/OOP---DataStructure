@@ -22,8 +22,24 @@ Game::Game()
     // Initialize the grid and empty positions for placing objects
     grid.getGrid("C:/Users/omart/OneDrive/Documents/GitHub/OOP---DataStructure/SnakeGameProject/SfmlTests/gridfile.txt", gridArray, emptyPositions);
 
-    // Set up collectible initially
     collectible.generateCollectible(window, emptyPositions);
+    collectible.generateDownsizeCollectible(emptyPositions,cellSizeX,cellSizeY,false);
+    collectible.generateInvincibilityCollectible(emptyPositions, cellSizeX, cellSizeY, false);
+
+    // Set obstacle sizes and colors
+    mainObstacle.setSize(sf::Vector2f(cellSizeX / 1.5, cellSizeY / 1.5));
+    mainObstacle.setFillColor(sf::Color::Yellow);
+
+    obstacleY.setSize(sf::Vector2f(cellSizeX / 1.5, cellSizeY / 1.5));
+    obstacleY.setFillColor(sf::Color::White);
+
+    obstacleX.setSize(sf::Vector2f(cellSizeX/ 1.5, cellSizeY/ 1.5));
+    obstacleX.setFillColor(sf::Color::Black);
+
+    // Spawn each obstacle at a valid position
+    obstacle.spawnObstacle(mainObstacle, emptyPositions, cellSizeX, mainObstacleDirection);
+    obstacle.spawnObstacle(obstacleY, emptyPositions, cellSizeX, mainObstacleDirection);
+    obstacle.spawnObstacle(obstacleX, emptyPositions, cellSizeX, mainObstacleDirection);
 }
 
 void Game::run() {

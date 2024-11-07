@@ -10,6 +10,8 @@ void Grid::getGrid(const std::string& path, char grid[10][10], std::vector<Posit
         return;
     }
 
+    emptyPositions.clear();
+
     std::string line;
     int row = 0;
     while (getline(myfile, line) && row < 10) {
@@ -25,6 +27,7 @@ void Grid::getGrid(const std::string& path, char grid[10][10], std::vector<Posit
         row++;
     }
 }
+
 
 void Grid::drawWalls(sf::RenderWindow& window, char grid[10][10], int cellSizeX, int cellSizeY) {
     for (int row = 0; row < 10; row++) {
