@@ -582,10 +582,6 @@ void generateCollectible(RectangleShape& collectible, const RenderWindow& window
 }
 
 
-
-
-
-
 // Function to extend the snake's body by adding a segment opposite to the current direction
 void extendSnake(vector<RectangleShape>& snakeBody, Direction currentDirection) {
     RectangleShape newSegment(Vector2f(20, 20));
