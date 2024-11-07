@@ -65,6 +65,8 @@ private:
     sf::Text scoreText;
 
     // Private methods for game functionality
+    void initializeObstacles();
+    void initializeCollectibles();
     void initializeGame();
     void processEvents();
     void handleKeyPress(sf::Keyboard::Key key);

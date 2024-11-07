@@ -69,79 +69,63 @@ void Snake::shrinkSnake() {
     }
 }
 
-bool Snake::checkSnakeCollision(const std::vector<sf::RectangleShape>& snakeBody, const sf::RectangleShape& mainObstacle,
-    const sf::RectangleShape& obstacleX, const sf::RectangleShape& obstacleY,
-    char grid[10][10], int cellSizeX, int cellSizeY, int& health,
-    bool invincible, bool& stopSnake, int& score, GameState& currentState,
+bool Snake::checkSnakeCollision(const std::vector<sf::RectangleShape>& snakeBody,
+    const sf::RectangleShape& mainObstacle,
+    const sf::RectangleShape& obstacleX,
+    const sf::RectangleShape& obstacleY,
+    char grid[10][10], int cellSizeX, int cellSizeY,
+    int& health, bool invincible,
+    bool& stopSnake, int& score,
+    GameState& currentState,
     bool& tempInvincible, sf::Clock& tempInvincibilityClock) {
     const sf::RectangleShape& head = snakeBody[0];
 
-    // Check collision with main obstacle
+    // Wall Collision Check
+    int headCol = static_cast<int>(head.getPosition().x) / cellSizeX;
+    int headRow = static_cast<int>(head.getPosition().y) / cellSizeY;
+
+    if (headRow < 0 || headRow >= 10 || headCol < 0 || headCol >= 10 || grid[headRow][headCol] == 'X') {
+        // Snake collides with a wall
+        if (invincible) {
+            stopSnake = true;  // Stop snake temporarily if invincible
+            return false;
+        }
+        else {
+            health--;
+            if (health <= 0) {
+                currentState = GAME_OVER;  // Trigger game over if health is zero
+            }
+            return true;  // Collision detected
+        }
+    }
+
+    // Obstacle Collision Check (as already present)
     if (head.getGlobalBounds().intersects(mainObstacle.getGlobalBounds()) ||
         head.getGlobalBounds().intersects(obstacleX.getGlobalBounds()) ||
         head.getGlobalBounds().intersects(obstacleY.getGlobalBounds())) {
         if (invincible) {
-            score += 10;
+            score += 10;  // Add score if invincible
             return false;
         }
         else {
             health--;
-            return true;
+            return true;  // Collision detected
         }
     }
 
-    // Check for self-collision
+    // Self-collision check
     for (size_t i = 1; i < snakeBody.size(); i++) {
         if (head.getGlobalBounds().intersects(snakeBody[i].getGlobalBounds())) {
             if (!invincible) {
                 health--;
+                return true;  // Collision detected
             }
-            return true;
         }
     }
 
-    // Check for wall collision
-    int headCol = static_cast<int>(head.getPosition().x) / cellSizeX;
-    int headRow = static_cast<int>(head.getPosition().y) / cellSizeY;
-    if (grid[headRow][headCol] == 'X') {
-        if (invincible) {
-            stopSnake = true;
-            return false;
-        }
-        else {
-            health--;
-        }
-        return true;
-    }
-
-    // Check for collision with obstacle X
-    if (head.getGlobalBounds().intersects(obstacleX.getGlobalBounds()) && !tempInvincible) {
-        if (score >= 200) {
-            score -= 200;
-        }
-        else {
-            currentState = GAME_OVER;
-        }
-        tempInvincible = true;
-        tempInvincibilityClock.restart();
-        return true;
-    }
-
-    // Check for collision with obstacle Y
-    if (head.getGlobalBounds().intersects(obstacleY.getGlobalBounds()) && !tempInvincible) {
-        if (score >= 100) {
-            score -= 100;
-        }
-        else {
-            currentState = GAME_OVER;
-        }
-        tempInvincible = true;
-        tempInvincibilityClock.restart();
-        return true;
-    }
-
-    return false;
+    return false;  // No collision
 }
+
 
 void Snake::setDirection(Direction direction) {
     currentDirection = direction;

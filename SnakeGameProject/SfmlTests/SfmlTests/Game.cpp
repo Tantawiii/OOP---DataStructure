@@ -110,33 +110,34 @@ void Game::update() {
 }
 
 void Game::handleCollectibles() {
-    // Check collision with regular collectible
-    if (collectible.checkCollision(snake.getBody().front())) {
+    // Normal collectible: Increases score by 100 and extends the snake's body
+    if (snake.getBody().front().getGlobalBounds().intersects(collectible.getCollectibleShape().getGlobalBounds())) {
         snake.extendSnake(snake.getBody(), snake.getDirection());
-        collectible.generateCollectible(window, emptyPositions);
-        snake.increaseSpeed();
+        collectible.generateCollectible(window, emptyPositions);  // Respawn collectible
         snake.increaseScore(100);
+        snake.increaseSpeed(); // Optional: Increase speed slightly with each collectible
     }
 
-    // Check collision with shrink collectible
-    if (collectible.checkCollision(collectible.getShrinkCollectibleShape())) {
+    // Shrink collectible: Shrinks snake and adds 1000 points to score
+    if (snake.getBody().front().getGlobalBounds().intersects(collectible.getShrinkCollectibleShape().getGlobalBounds())) {
         if (snake.getBody().size() > 1) {
             snake.shrinkSnake();
         }
-        collectible.generateDownsizeCollectible(emptyPositions, cellSizeX, cellSizeY, true);
+        collectible.generateDownsizeCollectible(emptyPositions, cellSizeX, cellSizeY, true);  // Respawn shrink collectible
         snake.increaseScore(1000);
     }
 
-    // Check collision with invincibility collectible
-    if (collectible.checkCollision(collectible.getInvincibilityCollectibleShape())) {
+    // Invincibility collectible: Grants temporary invincibility and adds 10 points
+    if (snake.getBody().front().getGlobalBounds().intersects(collectible.getInvincibilityCollectibleShape().getGlobalBounds())) {
         snake.setInvincible(true);
-        tempInvincibilityClock.restart();
-        collectible.generateInvincibilityCollectible(emptyPositions, cellSizeX, cellSizeY, true);
+        tempInvincibilityClock.restart();  // Start the invincibility timer
+        collectible.generateInvincibilityCollectible(emptyPositions, cellSizeX, cellSizeY, true);  // Respawn invincibility collectible
+        snake.increaseScore(10);
     }
 
     // Manage invincibility duration
     if (snake.isInvincible() && tempInvincibilityClock.getElapsedTime().asSeconds() > invincibilityDuration) {
-        snake.setInvincible(false);
+        snake.setInvincible(false);  // Disable invincibility after the duration ends
     }
 }
 
