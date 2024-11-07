@@ -133,7 +133,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Structured.cpp" />
+    <ClCompile Include="Collectible.cpp" />
+    <ClCompile Include="Extras.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="OOPWork.cpp" />
+    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="OOP.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Collectible.h" />
+    <ClInclude Include="Extras.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="Snake.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,111 +1,65 @@
 #pragma once
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <iostream>
 #include <vector>
-#include <cstdlib>
-#include <ctime>
-#include <fstream>
-#include <string>
-#include <algorithm>
-#include <random>
 #include "Position.h"
 #include "GameState.h"
-using namespace std;
-using namespace sf;
 
 // Enum for snake movement direction
 enum Direction { NONE, UP, DOWN, LEFT, RIGHT };
 
-class Snake
-{
-private:
-    Direction currentDirection = NONE;
-    int health = 3;
-    float speed = 20.0f;
-    int score = 0;
-    bool invincible = false;
-    bool stopSnake = false;
-    vector<RectangleShape> snakeBody;
-    RectangleShape head;
-
+class Snake {
 public:
     // Constructor
-    Snake() : head(sf::Vector2f(20, 20)) {
-        head.setFillColor(Color::Green);
-        head.setPosition(400, 300);
-        snakeBody.push_back(head);
-    }
-    // Setters
-    void setDirection(Direction direction) {
-        currentDirection = direction;
-    }
+    Snake();
 
-    void setHealth(int h) {
-        health = h;
-    }
+    // Drawing and movement
+    void drawSnake(sf::RenderWindow& window, std::vector<sf::RectangleShape>& snakeBody);
+    void moveSnake(std::vector<sf::RectangleShape>& snakeBody, Direction currentDirection, float speed);
 
-    void setSpeed(float s) {
-        speed = s;
-    }
+    // Growth and shrinking
+    void extendSnake(std::vector<sf::RectangleShape>& snakeBody, Direction currentDirection);
+    void shrinkSnake();
 
-    void setScore(int sc) {
-        score = sc;
-    }
+    // Collision checking
+    bool checkSnakeCollision(const std::vector<sf::RectangleShape>& snakeBody, const sf::RectangleShape& mainObstacle,
+        const sf::RectangleShape& obstacleX, const sf::RectangleShape& obstacleY,
+        char grid[10][10], int cellSizeX, int cellSizeY, int& health,
+        bool invincible, bool& stopSnake, int& score, GameState& currentState,
+        bool& tempInvincible, sf::Clock& tempInvincibilityClock);
 
-    void setInvincible(bool inv) {
-        invincible = inv;
-    }
+    // Getters and setters for direction, speed, score, invincibility, etc.
+    void setDirection(Direction direction);
+    Direction getDirection() const;
 
-    void setStopSnake(bool stop) {
-        stopSnake = stop;
-    }
+    float getSpeed() const;
+    void setSpeed(float newSpeed);
+    void increaseSpeed();
 
-    // Getters
-    Direction getDirection() const {
-        return currentDirection;
-    }
+    int getScore() const;
+    void setScore(int newScore);
+    void increaseScore(int amount);
 
-    int getHealth() const {
-        return health;
-    }
+    bool isInvincible() const;
+    void setInvincible(bool inv);
 
-    float getSpeed() const {
-        return speed;
-    }
+    bool getStopSnake() const;
+    void setStopSnake(bool stop);
 
-    int getScore() const {
-        return score;
-    }
+    // Resetting and retrieving snake body
+    void resetSnake();
+    std::vector<sf::RectangleShape>& getBody();
 
-    bool isInvincible() const {
-        return invincible;
-    }
+private:
+    // Snake properties
+    Direction currentDirection;        // Current movement direction
+    int health;                        // Health of the snake
+    float speed;                       // Movement speed of the snake
+    int score;                         // Current score
+    bool invincible;                   // Invincibility state
+    bool stopSnake;                    // Flag to stop snake's movement
 
-    bool isStopSnake() const {
-        return stopSnake;
-    }
-	void drawSnake(RenderWindow& window, vector<RectangleShape>& snakeBody);
-	void placeSnakeHead(RectangleShape& head, vector<Position> emptyPositions, const RectangleShape& obstacle, const RectangleShape& collectible, int cellSizeX, int cellSizeY);
-	void moveSnake(vector<RectangleShape>& snakeBody, Direction currentDirection, float speed);
-    bool checkSnakeCollision(
-        const vector<RectangleShape>& snakeBody,
-        const RectangleShape& mainObstacle,
-        const RectangleShape& obstacleX,
-        const RectangleShape& obstacleY,
-        char grid[10][10],
-        int cellSizeX,
-        int cellSizeY,
-        int& health,
-        bool invincible,
-        bool& stopSnake,
-        int& score,
-        GameState& currentState,
-        bool& tempInvincible,            // Add tempInvincible parameter
-        Clock& tempInvincibilityClock    // Add tempInvincibilityClock parameter
-    );
-    void extendSnake(vector<RectangleShape>& snakeBody, Direction currentDirection);
-
+    // Snake body
+    std::vector<sf::RectangleShape> snakeBody;  // Vector of rectangles representing snake segments
+    sf::RectangleShape head;                    // Head of the snake
 };
 
