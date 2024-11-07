@@ -140,7 +140,6 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="OOPWork.cpp" />
     <ClCompile Include="Snake.cpp" />
-    <ClCompile Include="OOP.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collectible.h" />
